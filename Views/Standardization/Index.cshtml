@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary collapsed-card" id="addStandard">
+            <div class="card-header">
+                <h3 class="card-title">Form Standarisasi Aset</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> Klik Disini
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form>
+                    <input type="hidden" id="txtId" />
+                    <input type="hidden" id="flagSave" />
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Dept</label>
+                                <select class="form-control" id="ddDept">
+                                    <option>--PILIH--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Tipe Aset</label>
+                                <select class="form-control" id="ddTipe">
+                                    <option>--PILIH--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Kode Level Jabatan</label>
+                                <input type="text" maxlength="5" class="form-control" id="txtLevel">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nama Level Jabatan</label>
+                                <input type="text" class="form-control" id="txtNama">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> Deskripsi Spesifikasi</label>
+                                <textarea class="form-control" rows="2" placeholder="Enter ..." id="txtSpec"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> Default Aplikasi</label>
+                                <textarea class="form-control" rows="2" placeholder="Enter ..." id="txtApp"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-info" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-danger float-right" id="btnCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Standarisasi Aset</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblStandard" class="table table-responsive table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Tipe Aset</th>
+                            <th>Dept</th>
+                            <th>Kode Jabatan</th>
+                            <th>Jenis Jabatan</th>
+                            <th>Spesifikasi Aset</th>
+                            <th>Aplikasi Aset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<script src="~/Scripts/page/itsm.rstandard.js"></script>

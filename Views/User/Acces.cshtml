@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Acces";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary collapsed-card" id="addAccess">
+            <div class="card-header">
+                <h3 class="card-title">Akses User</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> Klik Disini
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form>
+                    <input type="hidden" id="txtId" />
+                    <input type="hidden" id="flagSave" />
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nik</label>
+                                <input type="text" class="form-control" id="txtNik">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" id="txtNama">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Jabatan</label>
+                                <input type="hidden" class="form-control" id="txtKodeJb">
+                                <input type="text" class="form-control" id="txtJab">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Akses</label>
+                                <select class="form-control" id="ddAkses">
+                                    <option value="">--PILIH--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> Default Aplikasi</label>
+                                <textarea class="form-control" rows="2" placeholder="Enter ..." id="txtApp"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-info" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-danger float-right" id="btnCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Standarisasi Aset</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblStandard" class="table table-responsive table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Tipe Aset</th>
+                            <th>Dept</th>
+                            <th>Kode Jabatan</th>
+                            <th>Jenis Jabatan</th>
+                            <th>Spesifikasi Aset</th>
+                            <th>Aplikasi Aset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

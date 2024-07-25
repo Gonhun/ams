@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary collapsed-card" id="addAset">
+            <div class="card-header">
+                <h3 class="card-title">Form Registrasi Aset</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> Klik Disini
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12">
+                            <input type="hidden" id="flagSave" />
+                            <div class="form-group">
+                                <label>No Asset</label>
+                                <input type="text" class="form-control" id="txtNoAset" disabled placeholder="No Aset otomatis dibuat sistem">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <input type="hidden" id="flagSave" />
+                            <div class="form-group">
+                                <label>No SAP Asset</label>
+                                <input type="text" class="form-control" id="txtNoSap">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Tgl</label>
+                                <input type="text" class="form-control" id="txtTgl" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Site</label>
+                                <select class="form-control" id="ddSite">
+                                    <option>--PILIH--</option>
+                                    @foreach (var item in ViewBag.Site)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Status Asset</label>
+                                <select class="form-control" id="ddStatus">
+                                    <option>--PILIH--</option>
+                                    @foreach (var item in ViewBag.Status)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Jenis Asset</label>
+                                <select class="form-control" id="ddTipe">
+                                    <option>--PILIH--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Kategori Asset</label>
+                                <select class="form-control" id="ddKategori">
+                                    <option>--PILIH--</option>
+                                    @foreach (var item in ViewBag.Category)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nama Asset</label>
+                                <input type="text" class="form-control" id="txtNama">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Merk Asset</label>
+                                <select class="form-control" id="ddMerk">
+                                    <option>--PILIH--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Model Asset</label>
+                                <input type="text" class="form-control" id="txtModel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Lokasi Aset</label>
+                                <input type="text" class="form-control" id="txtLokasi">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Foto Asset</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="uploadAset">
+                                    <label id="asetLabel" class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Foto SN Aset</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="uploadSn">
+                                    <label id="snLabel" class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>SN Asset</label>
+                                <input type="text" class="form-control" id="txtSn">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Harga Asset</label>
+                                <input type="number" class="form-control" id="txtHarga">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Spesifikasi Asset</label>
+                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtSpecification"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="rowUsed" hidden>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Nik</label>
+                                <div class="row">
+                                    <div class="col-lg-10 col-sm-8">
+                                        <input type="text" class="form-control" id="txtNikEmp">
+                                    </div>
+                                    <div class="col-lg-2 col-sm-4">
+                                        <button type="button" class="btn btn-success" id="btnSearchNik">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" id="txtNamaEmp" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jabatan</label>
+                                <input type="text" class="form-control" id="txtJabatan" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-info" data-card-widget="collapse" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-danger float-right" data-card-widget="collapse" id="btnCancel">Cancel</button>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Grafik Status Aset</h3>
+                @*<div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>*@
+            </div>
+            <div class="card-body">
+                <div class="chart">
+                    @*<div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>*@
+                    <div id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 100%;" width="662" class="chartjs-render-monitor"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Aset</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblAset" class="table table-bordered compact table-striped">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            @*<th>Foto Aset</th>*@
+                            <th>No Aset</th>
+                            <th>No SAP Aset</th>
+                            <th>Nama Aset</th>
+                            <th>Kategori Aset</th>
+                            <th>Tipe</th>
+                            <th>Status Aset</th>
+                            <th>Sn</th>
+                            <th>Site</th>
+                            <th>Lokasi</th>
+                            @*<th>Foto Sn</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="popPicture" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/page/itsm.masset.js"></script>
