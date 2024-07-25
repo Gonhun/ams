@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AMS | Role</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/&#64;mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/fontawesome-free/css/all.min.css">
+    <!-- AdminLte-->
+    <link href="~/Content/adminlte/adminlte.min.css" rel="stylesheet" />
+    <!-- Overlay Scrollbars-->
+    <link href="~/Content/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" />
+    <!-- DataTable-->
+    <link href="~/Content/datatables/css/datatables.min.css" rel="stylesheet" />
+    <!-- Select 2 -->
+    <link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    @{
+        //ViewBag.pathParent = Request.Url.GetLeftPart(UriPartial.Scheme) + Request.Url.Authority;
+        
+    }
+</head>
+<body class="hold-transition login-page bg-danger disabled">
+    <div class="login-box">
+        <input type="hidden" id="urlPath" value="@System.Configuration.ConfigurationManager.AppSettings.Get("PortalUrl")" />
+        <!-- /.login-logo -->
+        <div class="card card-outline bg-light">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>AMS</b></a>
+            </div>
+            <div class="card-body">
+
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="txtNik" value="@Session["nik"].ToString()" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" value="@Session["name"].ToString()" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-address-card"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" value="@Session["jab"].ToString()" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-info-circle"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" value="@Session["site"].ToString()" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-globe-asia"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <select class="form-control" id="ddRole">
+                            <option>--PILIH ROLE--</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-question"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary btn-block" id="btnSignIn">Masuk</button>
+                            <button type="button" class="btn btn-danger btn-block" id="btnCancel">Batal</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+    <div class="modal fade bd-example-modal-sm" id="modalOverlay" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalOverlayLabel" aria-hidden="true">
+        <div class="modal-sm modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid bg-light">
+                        <div class="row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4" align="center">
+                                <br />
+                                <i class="fas fa-4x fa-sync fa-spin"></i>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>*@
+                @*<div class="modal-body">
+                    </div>*@
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+    <!-- jQuery UI 1.11.4 -->
+    @*<script src="~/Scripts/jquery-ui/jquery-ui.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui.1.13.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/adminlte.js"></script>
+    <script src="~/Scripts/page/itsm.role.js"></script>
+</body>
+</html>
