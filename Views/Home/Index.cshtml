@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-2 col-sm-12">
+                            <div class="form-group">
+                                <label>Site</label>
+                                @{
+                                    if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafItHo)
+                                    {
+                                        <select class="form-control" id="ddSite">
+                                            @{
+                                                foreach (var item in ViewBag.Site)
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-control" id="ddSite" value="@Session["site"].ToString()" disabled>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-12">
+                            <div class="form-group">
+                                <label>Tahun</label>
+                                <select class="form-control" id="ddYear">
+                                    @{
+                                        foreach (var item in ViewBag.Year)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Bulan</label>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="ddMonth">
+                                            @{
+                                                foreach (var item in ViewBag.Month)
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-info" id="btnSearch">
+                                            <span class="mdi mdi-2x mdi-search-web"></span>&nbsp;Cari
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @{
+                        if (Session["dept"].ToString() == "IT")
+                        {
+                            <div class="col-lg-3 col-6">
+
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3 id="reqValue">0</h3>
+                                        <p>Pengajuan Aset Baru</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="mdi mdi-text-box-search"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="mdi mdi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+
+                                <div class="small-box bg-lightblue">
+                                    <div class="inner">
+                                        <h3 id="freeValue">0</h3>
+                                        <p>Aset (Laptop/PC) Free</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="mdi mdi-laptop-account"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="mdi mdi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3 id="assetValue">0</h3>
+                                        <p>Total Populasi Aset</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="mdi mdi-laptop"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="mdi mdi-arrow-right"></i></a>
+                                </div>
+                            </div><div class="col-lg-3 col-6">
+
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3 id="licenseValue">Tba</h3>
+                                        <p>License Expired</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="mdi mdi-license"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="mdi mdi-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Chart Status Aset</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                @*<div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>*@
+                                @*<canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 100%;" width="662" height="312" class="chartjs-render-monitor"></canvas>*@
+                                <div id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 100%;" class="chartjs-render-monitor"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Chart Kalibrasi Aset</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 530px;" width="662" height="312" class="chartjs-render-monitor"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Bar Chart</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 530px;" width="662" height="312" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //var labelData = @Html.Raw(Json.Encode(@ViewBag.Status));
+    //var pieData = {
+    //    labels: labelData
+    //};
+</script>
+<script src="~/Scripts/page/itsm.home.js"></script>
