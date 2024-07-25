@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary collapsed-card" id="addMerk">
+            <div class="card-header">
+                <h3 class="card-title">Form Registrasi Merk Aset</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> Klik Disini
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form>
+                    <input type="hidden" id="flagSave" />
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Kode Merk Asset</label>
+                                <input type="text" class="form-control" id="txtId" maxlength="12">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nama Merk Aset</label>
+                                <input type="text" class="form-control" id="txtMerk">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group" style="padding-top:30px;">
+                                <button type="button" class="btn btn-info" id="btnSave">Simpan</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-danger" id="btnCancel">Batal</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Merk Aset</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblMerk" class="table table-responsive table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Kode Merk</th>
+                            <th>Merk Aset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<script src="~/Scripts/page/itsm.rmerkaset.js"></script>
