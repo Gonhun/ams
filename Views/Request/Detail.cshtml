@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-2">
+        <a href="@ViewBag.pathParent/@BssCoreV2.Constant.ITConstant.AmsMenuCode.DcUrlMenu[BssCoreV2.Constant.ITConstant.AmsMenuCode.AmsRequest]" class="btn btn-info">
+            <span class="mdi mdi-2x mdi-arrow-left"></span> &nbsp;Kembali
+        </a>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- The time line -->
+        <div class="timeline" id="reqSend" hidden>
+            <div class="time-label">
+                <span class="bg-red">
+                    <label id="lblReqDate"></label>
+                </span>
+            </div>
+
+            <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    @*<span class="time"><i class="fas fa-clock"></i><label id="lblReqTime"></label></span>*@
+                    <h3 class="timeline-header"><b id="lblCreatedBy"></b> mengajukan pengajuan aset dengan nomor <b id="lblReqNo"></b> </h3>
+
+                    <div class="timeline-body">
+                        <div class="card card-primary collapsed-card" id="addRequest">
+                            <div class="card-header">
+                                <h3 class="card-title">Detail Pengajuan Aset</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-plus"></i> Klik Disini
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="info-box">
+                                            <div class="info-box-content">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Nik</label>
+                                                            <input type="text" class="form-control" id="txtNik" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Nama</label>
+                                                            <input type="text" class="form-control" id="txtNama" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Jabatan</label>
+                                                            <input type="text" class="form-control" id="txtJabatan" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Note Pengajuan</label>
+                                                            <input type="text" class="form-control" id="txtReqRemark" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Jenis Aset</label>
+                                                            <input type="text" class="form-control" id="txtTipe" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Kepemilikan Aset</label>
+                                                            <input type="text" class="form-control" id="txtOwning" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Detail Spesifikasi</label>
+                                                            <textarea class="form-control" id="txtReqSpec" disabled></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <div class="info-box">
+                                                <div class="info-box-content">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Struktur Organisasi</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeSo"></span>
+                                                                <iframe id="iSo" style="width: 100%;" height="720" hidden></iframe>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Jobdesc</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeJobdesc"></span>
+                                                                <iframe id="iJobdesc" style="width: 100%;" height="720" hidden></iframe>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>BA diluar budget (bila ada)</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeBudget"></span>
+                                                                <iframe id="iBudget" style="width: 100%;" height="720" hidden></iframe>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-footer">
+
+                    </div>
+                </div>
+            </div>
+            <!-- END timeline item -->
+
+            <div>
+                <i class="fas fa-clock bg-gray"></i>
+            </div>
+        </div>
+        <div class="timeline" id="kabagValidation" hidden>
+            <!-- timeline time label -->
+            <div class="time-label">
+                <span class="bg-red">
+                    <label id="lblKabagDate"></label>
+                </span>
+            </div>
+            <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    @*<span class="time"><i class="fas fa-clock"></i> 12:05</span>*@
+                    <h3 class="timeline-header">Status Pengajuan</h3>
+
+                    <div class="timeline-body">
+                        <span class="badge badge-primary" id="lblStatusKabag"></span>
+                        <br />
+                        <p>Note: <b id="remarkKabag"></b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END timeline item -->
+            <!-- timeline item -->
+        </div>
+        <div class="timeline" id="itValidation" hidden>
+            <!-- timeline time label -->
+            <div class="time-label">
+                <span class="bg-red">
+                    <label id="lblItDate"></label>
+                </span>
+            </div>
+            <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    @*<span class="time"><i class="fas fa-clock"></i> 12:05</span>*@
+                    <h3 class="timeline-header">Status Validasi IT</h3>
+
+                    <div class="timeline-body">
+                        <span class="badge badge-primary" id="lblStatusIt"></span>
+                        <br />
+                        <p>Note: <b id="remarkIt"></b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END timeline item -->
+            <!-- timeline item -->
+        </div>
+        <div class="timeline" id="hrValidation" hidden>
+            <!-- timeline time label -->
+            <div class="time-label">
+                <span class="bg-red">
+                    <label id="lblHrDate"></label>
+                </span>
+            </div>
+            <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    @*<span class="time"><i class="fas fa-clock"></i> 12:05</span>*@
+                    <h3 class="timeline-header">Status Validasi HR</h3>
+
+                    <div class="timeline-body">
+                        <span class="badge badge-primary" id="lblStatusHr"></span>
+                        <br />
+                        <p>Note: <b id="remarkHr"></b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END timeline item -->
+            <!-- timeline item -->
+        </div>
+        <div class="timeline" id="ccValidation" hidden>
+            <!-- timeline time label -->
+            <div class="time-label">
+                <span class="bg-red">
+                    <label id="lblCcDate"></label>
+                </span>
+            </div>
+            <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                    @*<span class="time"><i class="fas fa-clock"></i> 12:05</span>*@
+                    <h3 class="timeline-header">Status Validasi CC</h3>
+
+                    <div class="timeline-body">
+                        <span class="badge badge-primary" id="lblStatusCc"></span>
+                        <br />
+                        <p>Note: <b id="remarkCc"></b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END timeline item -->
+            <!-- timeline item -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+<script src="~/Scripts/page/itsm.treqdetail.js"></script>

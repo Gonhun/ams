@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary collapsed-card" id="addRequest">
+            <div class="card-header">
+                <h3 class="card-title">Form Pengajuan Aset</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> Klik Disini
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-5 col-sm-12">
+                            <div class="form-group">
+                                <label>No Document</label>
+                                <input type="text" class="form-control" id="txtReqNo" disabled placeholder="No Dok muncul setelah pengajuan dibuat">
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-sm-12">
+                            <div class="form-group">
+                                <label>Site</label>
+                                <input type="text" class="form-control" id="txtSite" value="@Session["site"].ToString()" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Dept</label>
+                                <input type="text" class="form-control" id="txtDept" value="@Session["dept"].ToString()" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Tgl</label>
+                                <input type="text" class="form-control" id="txtTgl" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-info" id="cardUser">
+                                <div class="card-header">
+                                    <h3 class="card-title">User</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="info-box">
+                                                <div class="info-box-content">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Nik</label>
+                                                                <div class="row">
+
+                                                                    @{
+                                                                        if (new List<string>() { 
+                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KasiHo, 
+                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KasiSite,
+                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KabagHo,
+                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KabagSite,
+
+                                                                        }.Any(x => Session["role_id"].ToString().Contains(x)))
+                                                                        {
+                                                                            <div class="col-lg-10 col-sm-8">
+                                                                                <input type="text" class="form-control" id="txtNik">
+                                                                            </div>
+                                                                            <div class="col-lg-2 col-sm-4">
+                                                                                <button type="button" class="btn btn-success" id="btnSearch">
+                                                                                    <i class="fa fa-search"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="col-lg-12 col-sm-12">
+                                                                                <input type="text" class="form-control" id="txtNik" value="@Session["nik"].ToString()">
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Nama</label>
+                                                                <input type="text" class="form-control" id="txtNama" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Jabatan</label>
+                                                                <input type="text" class="form-control" id="txtJabatan" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Remark Pengajuan</label>
+                                                                <input type="text" class="form-control" id="txtRemark">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Tipe Aset yang diajukan</label>
+                                                                <select class="form-control" id="ddTipe">
+                                                                    <option>--PILIH--</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Lampiran BA diluar Budget (bila ada)</label>
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="uploadBudget">
+                                                                    <label class="custom-file-label" id="labelBu" for="uploadBudget">file wajib .pdf</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="info-box">
+                                                <div class="info-box-content">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Spesifikasi yang diajukan</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtReqSpec"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Kepemilikan Aset</label>
+                                                                <select class="form-control" id="ddOwning" disabled>
+                                                                    <option>--PILIH--</option>
+                                                                    <option value=1>ADA</option>
+                                                                    <option value=0>TIDAK ADA</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="rowPrev" hidden>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label>No Aset</label>
+                                                                    <input type="text" class="form-control" id="txtPrev" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label>Deskripsi Spesifikasi</label>
+                                                                    <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtPrevSpec" disabled></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Lampiran Jobdesc</label>
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="uploadJd">
+                                                                    <label class="custom-file-label" id="labelJd" for="uploadJd">file wajib.pdf</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Lampiran Struktur Organisasi</label>
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="uploadSo">
+                                                                    <label class="custom-file-label" id="labelSo" for="uploadSo">file wajib .pdf</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-info" data-card-widget="collapse" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-danger float-right" data-card-widget="collapse" id="btnCancel">Cancel</button>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Pengajuan</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblRequest" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>No Pengajuan</th>
+                            <th>Nik</th>
+                            <th>Dept</th>
+                            <th>Site</th>
+                            <th>Tipe Pengajuan Aset</th>
+                            <th>Ket Pengajuan</th>
+                            <th>Status Pengajuan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/page/itsm.trequest.js"></script>

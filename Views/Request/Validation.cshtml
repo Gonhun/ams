@@ -1,0 +1,711 @@
+﻿
+@{
+    ViewBag.Title = "Validation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Pengajuan</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="tblRequest" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>No Pengajuan</th>
+                            <th>Tgl Pengajuan</th>
+                            <th>Nik</th>
+                            <th>Nama</th>
+                            <th>Dept</th>
+                            <th>Site</th>
+                            <th>Kategori Aset</th>
+                            <th>Ket. Pengajuan</th>
+                            <th>Status Pengajuan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-xl" id="modalValidate" role="dialog" aria-labelledby="modalValidateLabel" aria-hidden="true">
+    <div class="modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @{
+                    if (new string[] { BssCoreV2.Constant.ITConstant.AccessItCode.StafItHo, BssCoreV2.Constant.ITConstant.AccessItCode.StafItSite }.Any(x => Session["role_id"].ToString().Contains(x)))
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Validasi IT</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafHr)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Validasi HR</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafCc)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Validasi CC</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.KabagHo || Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.KabagSite)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval Kabag</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.CostControl)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval Cost Control</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.PmSite)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval Pm</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.ItDeptDev)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval IT Dev</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.ItDeptOps)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval IT Ops</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.Thinktank)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval Thinktank</h5>
+                    }
+                    else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.Director)
+                    {
+                        @:<h5 class="modal-title" id="modalTitle">Approval Direktur</h5>
+                    }
+                }
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="info-box">
+                                    <div class="info-box-content">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>No Document</label>
+                                                    <input type="hidden" class="form-control" id="txtId" disabled>
+                                                    <input type="text" class="form-control" id="txtReqNo" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Site</label>
+                                                    <input type="text" class="form-control" id="txtSite" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Dept</label>
+                                                    <input type="text" class="form-control" id="txtDept" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Aset yang diajukan</label>
+                                                    <input type="hidden" class="form-control" id="txtIdTipe" disabled>
+                                                    <input type="text" class="form-control" id="txtTipeAset" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @{
+                                            if (new List<string>() { BssCoreV2.Constant.ITConstant.AccessItCode.KabagHo, BssCoreV2.Constant.ITConstant.AccessItCode.KabagSite }.Any(x => Session["role_id"].ToString().Contains(x)))
+                                            {
+                                                @:<div id="DeptValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddDeptValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value="true">Approve</option>
+                                                                    <option value="false">Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtDeptRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="deptSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="deptSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (new List<string>() { BssCoreV2.Constant.ITConstant.AccessItCode.StafItHo, BssCoreV2.Constant.ITConstant.AccessItCode.StafItSite }.Any(x => Session["role_id"].ToString().Contains(x)))
+                                            {
+                                                @:<div id="itValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddItValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value="true">Approve</option>
+                                                                    <option value="false">Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtItRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Spesifikasi Rekomendasi</label>
+                                                                <select class="form-control" id="ddStandard">
+                                                                    <option value="">--PILIH--</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Detail Spesifikasi</label>
+                                                                <textarea class="form-control" rows="5" placeholder="Enter ..." id="txtStandardSpec" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Rekomendasi Aset</label>
+                                                                <select class="form-control" id="ddRecommendation">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=1>New</option>
+                                                                    <option value=0>Asset Stock</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Aset</label>
+                                                                <select class="form-control" id="ddAset" hidden>
+                                                                    <option value="">--PILIH--</option>
+                                                                </select>
+                                                                <input type="text" class="form-control" id="txtNoAset" hidden disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Spesifikasi Aset</label>
+                                                                <textarea class="form-control" rows="5" placeholder="Enter ..." id="txtAsetSpec" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="itSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="itSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafHr)
+                                            {
+                                                @:<div id="hrValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddHrValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Status Karyawan</label>
+                                                                <select class="form-control" id="ddMpStatus">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=0>New Hire</option>
+                                                                    <option value=1>Existing</option>
+                                                                    <option value=2>Replacement</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtHrRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="hrSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="hrSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafCc)
+                                            {
+                                                @:<div id="ccValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddCcValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtCcRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Status Budget</label>
+                                                                <select class="form-control" id="ddBudgetStatus">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>On Budget</option>
+                                                                    <option value=false>Off Budget</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Periode Tahun Budget</label>
+                                                                <select class="form-control" id="ddYear">
+                                                                    <option value="">--PILIH--</option>
+                                                                    @foreach (var item in ViewBag.YearPeriod)
+                                                                    {
+                                                                        <option value="@item">@item</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Periode Bulan Budget</label>
+                                                                <select class="form-control" id="ddMonth">
+                                                                    <option value="">--PILIH--</option>
+                                                                    @foreach (var item in ViewBag.MonthPeriod)
+                                                                    {
+                                                                        <option value="@item.Key">@item.Value</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="ccSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="ccSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.PmSite)
+                                            {
+                                                @:<div id="PmValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddPmValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtPmRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="pmSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="pmSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.CostControl)
+                                            {
+                                                @:<div id="CostValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddCostValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtCostRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="costSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="costSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.ItDeptDev)
+                                            {
+                                                @:<div id="ItdValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddItDevValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value="true">Approve</option>
+                                                                    <option value="false">Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtItDevRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="itdSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="itDevSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.ItDeptOps)
+                                            {
+                                                @:<div id="ItoValidasi">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddItOpsValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtItOpsRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="itoSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="itOpsSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.Thinktank)
+                                            {
+                                                @:<div id="TtValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddThinktankValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtThintankRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="ttSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="thinkTankSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                            else if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.Director)
+                                            {
+                                                @:<div id="DirValidate">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Validasi</label>
+                                                                <select class="form-control" id="ddDirectorValidasi">
+                                                                    <option value="">--PILIH--</option>
+                                                                    <option value=true>Approve</option>
+                                                                    <option value=false>Reject</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Note Validasi</label>
+                                                                <textarea class="form-control" rows="1" placeholder="Enter ..." id="txtDirectorRemark"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>TTD digital</label>
+                                                                <div class="row" id="dirSign">
+                                                                    <div class="col-sm-12">
+                                                                        <canvas id="directorSignaturePad" width="300" style="max-width: 100%; border: solid"></canvas>
+                                                                        <canvas id="blank-pad" width="300" style="max-width: 100%; border: solid" hidden></canvas>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @:</div>
+                                            }
+                                        }
+                                        <div class="row">
+                                            <div class="col-lg-10 col-sm-8"></div>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <button type="button" class="btn btn-info" id="btnProcess">Proses</button>
+                                                <button type="button" class="btn btn-danger float-right" id="btnCancel">Batal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="card card-primary collapsed-card" id="addRequest">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Detail Pengajuan Aset</h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-plus"></i> Klik Disini
+                                            </button>
+                                        </div>
+                                        <!-- /.card-tools -->
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12">
+                                                <div class="info-box">
+                                                    <div class="info-box-content">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Nik</label>
+                                                                    <input type="text" class="form-control" id="txtNik" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Nama</label>
+                                                                    <input type="text" class="form-control" id="txtNama" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Jabatan</label>
+                                                                    <input type="text" class="form-control" id="txtJabatan" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Note Pengajuan</label>
+                                                                    <input type="text" class="form-control" id="txtReqRemark" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label>Detail Spesifikasi</label>
+                                                                    <textarea class="form-control" placeholder="Enter ..." id="txtReqSpec" disabled></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="info-box">
+                                                        <div class="info-box-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>Struktur Organisasi</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeSo"></span>
+                                                                        <iframe id="iSo" style="width: 100%;" height="720" hidden></iframe>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>Jobdesc</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeJobdesc"></span>
+                                                                        <iframe id="iJobdesc" style="width: 100%;" height="720" hidden></iframe>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>BA diluar budget (bila ada)</label>&nbsp;&nbsp;&nbsp;<span class="badge" id="badgeBudget"></span>
+                                                                        <iframe id="iBudget" style="width: 100%;" height="720" hidden></iframe>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modalPdf" role="dialog" aria-labelledby="modalPdfLabel" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Form Pengajuan Aset</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="iForm" style="width: 100%;" height="720"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/page/itsm.treqvalidation.js"></script>
