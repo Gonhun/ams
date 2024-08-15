@@ -662,7 +662,7 @@ $('#tblRequest tbody').on('click', '#btnDownload', function () {
     var data = table1.row($(this).parents('tr')).data();
     var dataDetail = data.req_detail;
     data.req_date = convertJsonDateToShortDate(data.req_date);
-    console.log(data);
+    console.log(dataDetail);
     var iframe = document.getElementById("iForm");
     //iframe.src = $('#urlPath').val() + "/Report/Ams_ViewerRptReqForm.aspx";
 
@@ -713,6 +713,7 @@ function Update() {
             req_number: $("#txtReqNo").val(),
             req_dept: $("#txtDept").val(),
             req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
             it_is_process: $("#ddItValidasi").val(),
             it_processed_remark: $("#txtItRemark").val(),
             asset_recommendation: $("#ddRecommendation").val(),
@@ -727,6 +728,8 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
             req_dept: $("#txtDept").val(),
             hr_is_process: $("#ddHrValidasi").val(),
             hr_processed_remark: $("#txtHrRemark").val(),
@@ -740,6 +743,8 @@ function Update() {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
             req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
             cc_is_process: $("#ddCcValidasi").val(),
             cc_processed_remark: $("#txtCcRemark").val(),
             budget_status: $("#ddBudgetStatus").val(),
@@ -753,7 +758,9 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
@@ -768,7 +775,9 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
@@ -783,13 +792,15 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
             req_id: $("#txtId").val(),
-            approval_dept: $("#ddItDevValidasi").val(),
-            dept_remark: $("#txtItDevRemark").val(),
+            approval_it_dev: $("#ddItDevValidasi").val(),
+            it_dev_remark: $("#txtItDevRemark").val(),
             it_dev_sign_encode: signaturePad.toDataURL() == blankPad.toDataURL() ? null : signaturePad.toDataURL(),
         }
     }
@@ -798,13 +809,15 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
             req_id: $("#txtId").val(),
-            approval_dept: $("#ddItOpsValidasi").val(),
-            dept_remark: $("#txtItOpsRemark").val(),
+            approval_it_ops: $("#ddItOpsValidasi").val(),
+            it_ops_remark: $("#txtItOpsRemark").val(),
             it_ops_sign_encode: signaturePad.toDataURL() == blankPad.toDataURL() ? null : signaturePad.toDataURL(),
         }
     }
@@ -813,13 +826,15 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
             req_id: $("#txtId").val(),
-            approval_dept: $("#ddThinktankValidasi").val(),
-            dept_remark: $("#txtThinktankRemark").val(),
+            approval_thinktank: $("#ddThinktankValidasi").val(),
+            thinktank_remark: $("#txtThinktankRemark").val(),
             thinktank_sign_encode: signaturePad.toDataURL() == blankPad.toDataURL() ? null : signaturePad.toDataURL(),
         }
     }
@@ -828,13 +843,15 @@ function Update() {
         S_DATA = {
             req_id: $("#txtId").val(),
             req_number: $("#txtReqNo").val(),
-            req_dept: $("#txtDept").val()
+            req_dept: $("#txtDept").val(),
+            req_site: $("#txtSite").val(),
+            req_nik: $("#txtNik").val(),
         }
 
         S_DETAIL = {
             req_id: $("#txtId").val(),
-            approval_dept: $("#ddDirectorValidasi").val(),
-            dept_remark: $("#txtDirectorRemark").val(),
+            approval_director: $("#ddDirectorValidasi").val(),
+            director_remark: $("#txtDirectorRemark").val(),
             director_sign_encode: signaturePad.toDataURL() == blankPad.toDataURL() ? null : signaturePad.toDataURL(),
         }
     }
