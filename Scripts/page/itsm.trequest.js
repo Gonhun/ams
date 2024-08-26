@@ -128,27 +128,27 @@ function loadGrid() {
                             let dirFlag;
 
                             if (row.req_detail.approval_dept == null) {
-                                deptFlag = `<span class="badge badge-warning">${row.req_detail.dept_flag}</span>`;
+                                deptFlag = `<span class="badge badge-warning">${row.dept_flag}</span>`;
                             }
                             else {
                                 if (row.req_detail.approval_dept == true) {
-                                    deptFlag = `<span class="badge badge-success">${row.req_detail.dept_flag}</span>`;
+                                    deptFlag = `<span class="badge badge-success">${row.dept_flag}</span>`;
                                 }
                                 else {
-                                    deptFlag = `<span class="badge badge-danger">${row.req_detail.dept_flag}</span>`;
+                                    deptFlag = `<span class="badge badge-danger">${row.dept_flag}</span>`;
                                 }
                             }
 
                             if (sessionSite != "JKT") {
                                 if (row.req_detail.approval_dept == null) {
-                                    pmFlag = `<span class="badge badge-warning">${row.req_detail.pm_flag}</span>`;
+                                    pmFlag = `<span class="badge badge-warning">${row.pm_flag}</span>`;
                                 }
                                 else {
                                     if (row.req_detail.approval_dept == true) {
-                                        pmFlag = `<span class="badge badge-success">${row.req_detail.pm_flag}</span>`;
+                                        pmFlag = `<span class="badge badge-success">${row.pm_flag}</span>`;
                                     }
                                     else {
-                                        pmFlag = `<span class="badge badge-danger">${row.req_detail.pm_flag}</span>`;
+                                        pmFlag = `<span class="badge badge-danger">${row.pm_flag}</span>`;
                                     }
                                 }
                             }
@@ -190,14 +190,62 @@ function loadGrid() {
                             }
 
                             if (row.req_detail.approval_cc == null) {
-                                deptFlag = `<span class="badge badge-warning">${row.req_detail.dept_flag}</span>`;
+                                costFlag = `<span class="badge badge-warning">${row.cost_flag}</span>`;
                             }
                             else {
-                                if (row.req_detail.approval_dept == true) {
-                                    deptFlag = `<span class="badge badge-success">${row.req_detail.dept_flag}</span>`;
+                                if (row.req_detail.approval_cc == true) {
+                                    costFlag = `<span class="badge badge-success">${row.cost_flag}</span>`;
                                 }
                                 else {
-                                    deptFlag = `<span class="badge badge-danger">${row.req_detail.dept_flag}</span>`;
+                                    costFlag = `<span class="badge badge-danger">${row.cost_flag}</span>`;
+                                }
+                            }
+
+                            if (row.req_detail.approval_it_dev == null) {
+                                it_dev_flag = `<span class="badge badge-warning">${row.it_dev_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_it_dev == true) {
+                                    it_dev_flag = `<span class="badge badge-success">${row.it_dev_flag}</span>`;
+                                }
+                                else {
+                                    it_dev_flag = `<span class="badge badge-danger">${row.it_dev_flag}</span>`;
+                                }
+                            }
+
+                            if (row.req_detail.approval_it_ops == null) {
+                                it_ops_flag = `<span class="badge badge-warning">${row.it_ops_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_it_ops == true) {
+                                    it_ops_flag = `<span class="badge badge-success">${row.it_ops_flag}</span>`;
+                                }
+                                else {
+                                    it_ops_flag = `<span class="badge badge-danger">${row.it_ops_flag}</span>`;
+                                }
+                            }
+
+                            if (row.req_detail.approval_thinktank == null) {
+                                tankFlag = `<span class="badge badge-warning">${row.thinktank_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_thinktank == true) {
+                                    tankFlag = `<span class="badge badge-success">${row.thinktank_flag}</span>`;
+                                }
+                                else {
+                                    tankFlag = `<span class="badge badge-danger">${row.thinktank_flag}</span>`;
+                                }
+                            }
+
+                            if (row.req_detail.approval_director == null) {
+                                dirFlag = `<span class="badge badge-warning">${row.director_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_director == true) {
+                                    dirFlag = `<span class="badge badge-success">${row.director_flag}</span>`;
+                                }
+                                else {
+                                    dirFlag = `<span class="badge badge-danger">${row.director_flag}</span>`;
                                 }
                             }
 
