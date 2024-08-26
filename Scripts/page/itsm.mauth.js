@@ -61,6 +61,17 @@ function loadGrid() {
                             sortable: false,
                         },
                         {
+                            'data': 'id',
+                            className: 'align-middle dt-nowrap',
+                            render: function (data, type, row) {
+                                return `
+                                    <button class="btn btn-icon btn-warning" id="btnReset">
+                                        <i class="mdi mdi-lock-reset"></i>
+                                    </button>&nbsp;`;
+                            },
+                            sortable: false,
+                        },
+                        {
                             'data': 'nik',
                             className: 'dt-nowrap align-middle'
                         },
@@ -167,6 +178,26 @@ $('#tblAuth tbody').on('click', '#btnDisable', function () {
 
     $.ajax({
         url: urlPath + 'api/user/update',
+        type: 'POST',
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify({ model: S_DATA }),
+        contentType: "application/json; charset=utf-8",
+        complete: function (e) {
+            loadGrid();
+            alert(e.responseJSON.StatusMessage);
+        }
+    })
+})
+
+$('#tblAuth tbody').on('click', '#btnReset', function () {
+    var data = table1.row($(this).parents('tr')).data();
+    console.log(data);
+
+    var S_DATA = data;
+
+    $.ajax({
+        url: urlPath + 'api/user/reset',
         type: 'POST',
         dataType: "json",
         cache: false,

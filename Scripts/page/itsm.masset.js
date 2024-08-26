@@ -2,14 +2,14 @@
 
 $(document).ready(function () {
     $('#txtTgl').datepicker({
-        dateFormat: 'yy-MM-dd',
+        dateFormat: 'yy-M-dd',
         changeMonth: true,
         changeYear: true,
         orientation: "bottom auto"
     });
     $("#flagSave").val("INSERT");
 
-    //$("#txtTgl").val(moment().format("YYYY-MMM-DD"))
+    $("#txtTgl").val(moment().format("YYYY-MMM-DD"))
 
     loadDdType();
     loadDdMerk();
@@ -233,11 +233,22 @@ function loadGrid() {
                         }
                     },
                     {
+                        'data': 'asset_received',
+                        render: function (data, type, row) {
+                            return convertJsonDateToShortDate(row.asset_received);
+                        },
+                        className: 'dt-nowrap align-middle'
+                    },
+                    {
                         'data': 'asset_num',
                         className: 'dt-nowrap align-middle'
                     },
                     {
-                        'data': 'asset_num_sap',
+                        'data': 'asset_no_pp',
+                        className: 'dt-nowrap align-middle'
+                    },
+                    {
+                        'data': 'asset_no_pb',
                         className: 'dt-nowrap align-middle'
                     },
                     {
@@ -264,6 +275,11 @@ function loadGrid() {
                         render: function (data, type, row) {
                             return row.status_name;
                         }
+                    },
+                    {
+                        'data': 'asset_price',
+                        className: 'dt-nowrap align-middle',
+                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp')
                     },
                     {
                         'data': 'asset_sn',
@@ -422,7 +438,8 @@ function Save() {
     }
 
     formData.append("asset_num", $("#txtNoAset").val());
-    formData.append("asset_num_sap", $("#txtNoSap").val());
+    formData.append("asset_no_pp", $("#txtNoPp").val());
+    formData.append("asset_no_pb", $("#txtNoPb").val());
     formData.append("asset_received", $("#txtTgl").val());
     formData.append("asset_name", $("#txtNama").val());
     formData.append("asset_status", $("#ddStatus").val());
@@ -484,6 +501,8 @@ function ClearData() {
     $("#txtNoAset").attr("disabled", false);
     $('#txtTgl').val("");
     $("#txtNoAset").val("");
+    $("#txtNoPp").val("");
+    $("#txtNoPb").val("");
     $("#txtNamaAset").val("");
     $("#ddStatus").val("");
     $("#ddKategori").val("");
