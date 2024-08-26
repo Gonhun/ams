@@ -52,7 +52,7 @@ $(document).ready(function () {
     $("#ddAset").next(".select2-container").hide();
     $("#txtAsetSpec").attr("disabled", true);
 
-    $("#btnClearPad").("hidden", true)
+    $("#btnClearPad").attr("hidden", true)
     $("#deptSign").attr("hidden", true)
     $("#itSign").attr("hidden", true)
     $("#hrSign").attr("hidden", true)
