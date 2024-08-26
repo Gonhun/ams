@@ -116,7 +116,7 @@ function loadGrid() {
                     ],
                     order: [[4, 'asc']],
                     rowGroup: {
-                        dataSrc: 'acc_dept',
+                        dataSrc: 'acc_site',
                         startRender: function (rows, group) {
                             var collapsed = !!collapsedGroups[group];
 

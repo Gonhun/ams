@@ -329,17 +329,13 @@ function Save() {
             console.log(res)
             alert(res.responseJSON.StatusMessage);
             loadGrid();
-            Cancel();
         }
     })
 }
 
 function Cancel() {
     $("#txtId").val("");
-    $("#txtReqNo").val();
-    $("#txtNik").val("");
-    $("#txtNama").val("");
-    $("#txtJabatan").val("");
+    $("#txtReqNo").val("");
     $("#ddTipe").val("");
     $("#txtReqSpec").val("");
     $("#ddOwning").val("");
@@ -347,6 +343,9 @@ function Cancel() {
     $("#txtPrev").val("");
     $("#txtPrevSpec").val("");
     $("#ddKondisi").val("");
+
+    $("#txtNik").attr("disabled", true);
+    loadNrp();
 
     $("#txtId").attr("disabled", true);
     if (sessionRole != "SHO" || sessionRole != "SSS") {
