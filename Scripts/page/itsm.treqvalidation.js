@@ -629,26 +629,26 @@ function loadGrid() {
                             }
 
                             if (row.req_detail.approval_it_dev == null) {
-                                it_dev_flag = `<span class="badge badge-warning">${row.it_dev_flag}</span>`;
+                                devFlag = `<span class="badge badge-warning">${row.it_dev_flag}</span>`;
                             }
                             else {
                                 if (row.req_detail.approval_it_dev == true) {
-                                    it_dev_flag = `<span class="badge badge-success">${row.it_dev_flag}</span>`;
+                                    devFlag = `<span class="badge badge-success">${row.it_dev_flag}</span>`;
                                 }
                                 else {
-                                    it_dev_flag = `<span class="badge badge-danger">${row.it_dev_flag}</span>`;
+                                    devFlag = `<span class="badge badge-danger">${row.it_dev_flag}</span>`;
                                 }
                             }
 
                             if (row.req_detail.approval_it_ops == null) {
-                                it_ops_flag = `<span class="badge badge-warning">${row.it_ops_flag}</span>`;
+                                opsFlag = `<span class="badge badge-warning">${row.it_ops_flag}</span>`;
                             }
                             else {
                                 if (row.req_detail.approval_it_ops == true) {
-                                    it_ops_flag = `<span class="badge badge-success">${row.it_ops_flag}</span>`;
+                                    opsFlag = `<span class="badge badge-success">${row.it_ops_flag}</span>`;
                                 }
                                 else {
-                                    it_ops_flag = `<span class="badge badge-danger">${row.it_ops_flag}</span>`;
+                                    opsFlag = `<span class="badge badge-danger">${row.it_ops_flag}</span>`;
                                 }
                             }
 
