@@ -140,11 +140,11 @@ function loadGrid() {
                             }
 
                             if (sessionSite != "JKT") {
-                                if (row.req_detail.approval_dept == null) {
+                                if (row.req_detail.approval_pm == null) {
                                     pmFlag = `<span class="badge badge-warning">${row.pm_flag}</span>`;
                                 }
                                 else {
-                                    if (row.req_detail.approval_dept == true) {
+                                    if (row.req_detail.approval_pm == true) {
                                         pmFlag = `<span class="badge badge-success">${row.pm_flag}</span>`;
                                     }
                                     else {
