@@ -541,7 +541,12 @@ function loadGrid() {
                         'data': 'approval_flag',
                         className: 'dt-head-center dt-nowrap',
                         render: function (data, type, row) {
-                            if (row.it_is_process == true && row.hr_is_process == true && row.cc_is_process == true) {
+                            if (row.detail[0].approval_dept == true) {
+                                return `<span class="badge badge-info">${row.approval_flag}</span>
+                                            <i class="mdi mdi-arrow-right-bold"></i>
+                                            <span class="badge badge-danger">${row.it_flag}</span>`;
+                            }
+                            else if (row.it_is_process == true && row.hr_is_process == true && row.cc_is_process == true) {
                                 return `<span class="badge badge-success">${row.it_flag}</span>
                                             <i class="mdi mdi-arrow-right-bold"></i>
                                             <span class="badge badge-success">${row.hr_flag}</span> 
