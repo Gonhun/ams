@@ -541,7 +541,7 @@ function loadGrid() {
                         'data': 'approval_flag',
                         className: 'dt-head-center dt-nowrap',
                         render: function (data, type, row) {
-                            if (row.detail[0].approval_dept == true) {
+                            if (row.req_detail.approval_dept == true) {
                                 return `<span class="badge badge-info">${row.approval_flag}</span>
                                             <i class="mdi mdi-arrow-right-bold"></i>
                                             <span class="badge badge-danger">${row.it_flag}</span>`;
