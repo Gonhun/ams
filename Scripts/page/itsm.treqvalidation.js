@@ -52,6 +52,7 @@ $(document).ready(function () {
     $("#ddAset").next(".select2-container").hide();
     $("#txtAsetSpec").attr("disabled", true);
 
+    $("#btnClearPad").("hidden", true)
     $("#deptSign").attr("hidden", true)
     $("#itSign").attr("hidden", true)
     $("#hrSign").attr("hidden", true)
@@ -90,9 +91,11 @@ $("#ddRecommendation").change(function () {
 
 $("#ddDeptValidasi").change(function () {
     if ($("#ddDeptValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#deptSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#deptSign").attr("hidden", true)
     }
 })
@@ -100,81 +103,99 @@ $("#ddDeptValidasi").change(function () {
 $("#ddItValidasi").change(function () {
     console.log($("#ddItValidasi").val())
     if ($("#ddItValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#itSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#itSign").attr("hidden", true)
     }
 })
 
 $("#ddHrValidasi").change(function () {
     if ($("#ddHrValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#hrSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#hrSign").attr("hidden", true)
     }
 })
 
 $("#ddCcValidasi").change(function () {
     if ($("#ddCcValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#ccSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#ccSign").attr("hidden", true)
     }
 })
 
 $("#ddPmValidasi").change(function () {
     if ($("#ddPmValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#pmSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#pmSign").attr("hidden", true)
     }
 })
 
 $("#ddCostValidasi").change(function () {
     if ($("#ddCostValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#costSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#costSign").attr("hidden", true)
     }
 })
 
 $("#ddItDevValidasi").change(function () {
     if ($("#ddItDevValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#itdSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#itdSign").attr("hidden", true)
     }
 })
 
 $("#ddItOpsValidasi").change(function () {
     if ($("#ddItOpsValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#itoSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#itoSign").attr("hidden", true)
     }
 })
 
 $("#ddThinktankValidasi").change(function () {
     if ($("#ddThinktankValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#ttSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#ttSign").attr("hidden", true)
     }
 })
 
 $("#ddDirectorValidasi").change(function () {
     if ($("#ddDrectorValidasi").val() == "true") {
+        $("#btnClearPad").attr("hidden", false)
         $("#dirSign").attr("hidden", false)
     }
     else {
+        $("#btnClearPad").attr("hidden", true)
         $("#dirSign").attr("hidden", true)
     }
 })
