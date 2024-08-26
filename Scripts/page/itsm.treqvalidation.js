@@ -65,6 +65,10 @@ $(document).ready(function () {
 
 });
 
+$("#btnClearPad").click(function () {
+    signaturePad.clear();
+})
+
 $("#ddRecommendation").change(function () {
     console.log($("#ddRecommendation").val())
     if ($("#ddRecommendation").val() == 1) {
