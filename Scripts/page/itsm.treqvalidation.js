@@ -1,5 +1,6 @@
 ﻿var urlPath = $("#urlPath").val()
 var sessionId = $("#sessionId").val()
+var sessionSite = $("#site").val();
 var canvas;
 var blank = document.getElementById("blank-pad");
 var signaturePad;
@@ -541,73 +542,106 @@ function loadGrid() {
                         'data': 'approval_flag',
                         className: 'dt-head-center dt-nowrap',
                         render: function (data, type, row) {
-                            if (row.req_detail.approval_dept == true) {
-                                return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-danger">${row.it_flag}</span>`;
-                            }
-                            else if (row.it_is_process == true && row.hr_is_process == true && row.cc_is_process == true) {
-                                return `<span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.hr_flag}</span> 
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.cc_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                        <span class="badge badge-primary">${row.approval_flag}</span>`
-                            }
-                            else if (row.it_is_process != null || row.hr_is_process != null || row.cc_is_process != null) {
-                                if (row.cc_is_process == true) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.hr_flag}</span> 
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.cc_flag}</span>`;
-                                }
-                                else if (row.cc_is_process == false) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.hr_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-danger">${row.cc_flag}</span>`;
-                                }
+                            let flag;
+                            let deptFlag;
+                            let pmFlag;
+                            let itFlag;
+                            let hrFlag;
+                            let ccFlag;
+                            let costFlag;
+                            let devFlag;
+                            let opsFlag;
+                            let tankFlag;
+                            let dirFlag;
 
-                                if (row.hr_is_process == true) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.hr_flag}</span> 
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-warning">${row.cc_flag}</span>`;
-                                }
-                                else if (row.hr_is_process == false) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-danger">${row.hr_flag}</span> `;
-                                }
-
-                                if (row.it_is_process == true) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-success">${row.it_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-warning">${row.hr_flag}</span>`;
-                                }
-                                else if (row.it_is_process == false) {
-                                    return `<span class="badge badge-info">${row.approval_flag}</span>
-                                            <i class="mdi mdi-arrow-right-bold"></i>
-                                            <span class="badge badge-danger">${row.it_flag}</span>`;
-                                }
-
+                            if (row.req_detail.approval_dept == null) {
+                                deptFlag = `<span class="badge badge-warning">${row.req_detail.dept_flag}</span>`;
                             }
                             else {
-                                return `<span class="badge badge-danger">${row.approval_flag}</span>`
+                                if (row.req_detail.approval_dept == true) {
+                                    deptFlag = `<span class="badge badge-success">${row.req_detail.dept_flag}</span>`;
+                                }
+                                else {
+                                    deptFlag = `<span class="badge badge-danger">${row.req_detail.dept_flag}</span>`;
+                                }
+                            }
+
+                            if (sessionSite != "JKT") {
+                                if (row.req_detail.approval_dept == null) {
+                                    pmFlag = `<span class="badge badge-warning">${row.req_detail.pm_flag}</span>`;
+                                }
+                                else {
+                                    if (row.req_detail.approval_dept == true) {
+                                        pmFlag = `<span class="badge badge-success">${row.req_detail.pm_flag}</span>`;
+                                    }
+                                    else {
+                                        pmFlag = `<span class="badge badge-danger">${row.req_detail.pm_flag}</span>`;
+                                    }
+                                }
+                            }
+
+                            if (row.it_is_process == null) {
+                                itFlag = `<span class="badge badge-warning">${row.it_flag}</span>`;
+                            }
+                            else {
+                                if (row.it_is_process == true) {
+                                    itFlag = `<span class="badge badge-success">${row.it_flag}</span>`;
+                                }
+                                else if (row.it_is_process == false) {
+                                    itFlag = `<span class="badge badge-danger">${row.it_flag}</span>`;
+                                }
+                            }
+
+                            if (row.hr_is_process == null) {
+                                hrFlag = `<span class="badge badge-warning">${row.hr_flag}</span>`;
+                            }
+                            else {
+                                if (row.hr_is_process == true) {
+                                    hrFlag = `<span class="badge badge-success">${row.hr_flag}</span>`;
+                                }
+                                else if (row.hr_is_process == false) {
+                                    hrFlag = `<span class="badge badge-danger">${row.hr_flag}</span> `;
+                                }
+                            }
+
+                            if (row.cc_is_process == null) {
+                                ccFlag = `<span class="badge badge-warning">${row.cc_flag}</span>`;
+                            }
+                            else {
+                                if (row.cc_is_process == true) {
+                                    return `<span class="badge badge-success">${row.cc_flag}</span>`;
+                                }
+                                else if (row.cc_is_process == false) {
+                                    return `<span class="badge badge-danger">${row.cc_flag}</span>`;
+                                }
+                            }
+
+                            if (row.req_detail.approval_cc == null) {
+                                deptFlag = `<span class="badge badge-warning">${row.req_detail.dept_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_dept == true) {
+                                    deptFlag = `<span class="badge badge-success">${row.req_detail.dept_flag}</span>`;
+                                }
+                                else {
+                                    deptFlag = `<span class="badge badge-danger">${row.req_detail.dept_flag}</span>`;
+                                }
+                            }
+
+                            if (site != "JKT") {
+
+                                return deptFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + pmFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + itFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + hrFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + ccFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + costFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + devFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + opsFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + tankFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + dirFlag;
+                            }
+                            else {
+                                return deptFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + itFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + hrFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + ccFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + costFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + devFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + opsFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + tankFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + dirFlag;
                             }
 
                         },
