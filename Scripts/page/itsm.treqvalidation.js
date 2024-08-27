@@ -678,9 +678,9 @@ function loadGrid() {
 
                             if (site != "JKT") {
 
-                                return deptFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + pmFlag
-                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + itFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + hrFlag
-                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + ccFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + costFlag
+                                return deptFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + itFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + hrFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + ccFlag
+                                    + '<i class="mdi mdi-arrow-right-bold"></i>' + pmFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + costFlag
                                     + '<i class="mdi mdi-arrow-right-bold"></i>' + devFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + opsFlag
                                     + '<i class="mdi mdi-arrow-right-bold"></i>' + tankFlag + '<i class="mdi mdi-arrow-right-bold"></i>' + dirFlag;
                             }
