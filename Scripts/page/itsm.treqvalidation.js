@@ -875,8 +875,8 @@ function Update() {
 
         S_DETAIL = {
             req_id: $("#txtId").val(),
-            approval_pm: $("#ddCostValidasi").val(),
-            pm_remark: $("#txtCostRemark").val(),
+            approval_pm: $("#ddPmValidasi").val(),
+            pm_remark: $("#txtPmRemark").val(),
             pm_sign_encode: signaturePad.toDataURL() == blankPad.toDataURL() ? null : signaturePad.toDataURL(),
         }
     }
