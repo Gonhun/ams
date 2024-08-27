@@ -139,17 +139,15 @@ function loadGrid() {
                                 }
                             }
 
-                            if (sessionSite != "JKT") {
-                                if (row.req_detail.approval_pm == null) {
-                                    pmFlag = `<span class="badge badge-warning">${row.pm_flag}</span>`;
+                            if (row.req_detail.approval_pm == null) {
+                                pmFlag = `<span class="badge badge-warning">${row.pm_flag}</span>`;
+                            }
+                            else {
+                                if (row.req_detail.approval_pm == true) {
+                                    pmFlag = `<span class="badge badge-success">${row.pm_flag}</span>`;
                                 }
                                 else {
-                                    if (row.req_detail.approval_pm == true) {
-                                        pmFlag = `<span class="badge badge-success">${row.pm_flag}</span>`;
-                                    }
-                                    else {
-                                        pmFlag = `<span class="badge badge-danger">${row.pm_flag}</span>`;
-                                    }
+                                    pmFlag = `<span class="badge badge-danger">${row.pm_flag}</span>`;
                                 }
                             }
 
