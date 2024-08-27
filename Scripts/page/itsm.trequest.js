@@ -180,10 +180,10 @@ function loadGrid() {
                             }
                             else {
                                 if (row.cc_is_process == true) {
-                                    return `<span class="badge badge-success">${row.cc_flag}</span>`;
+                                    ccFlag = `<span class="badge badge-success">${row.cc_flag}</span>`;
                                 }
                                 else if (row.cc_is_process == false) {
-                                    return `<span class="badge badge-danger">${row.cc_flag}</span>`;
+                                    ccFlag = `<span class="badge badge-danger">${row.cc_flag}</span>`;
                                 }
                             }
 
