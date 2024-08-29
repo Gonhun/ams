@@ -286,9 +286,12 @@ $("#ddAset").change(function () {
         complete: function (res) {
             if (res.responseJSON.StatusCode == 200) {
                 $("#txtAsetSpec").val(res.responseJSON.Value[i].asset_spec);
+                $("#txtAsetSpec").attr("disabled", true);
             }
             else {
                 alert(res.responseJSON.StatusMessage);
+                $("#txtAsetSpec").attr("disabled", false);
+
             }
         }
     })
