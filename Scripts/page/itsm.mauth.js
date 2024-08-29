@@ -1,7 +1,7 @@
 ﻿var urlPath = $("#urlPath").val()
+var sessSite = $("#site").val()
 
 $(document).ready(function () {
-    loadGrid();
     loadDdDept();
     $("#flagSave").val("INSERT")
 })
@@ -25,12 +25,13 @@ $("#ddSite").change(function () {
 
 function loadGrid() {
     var collapsedGroups = {};
+    
 
     $.ajax({
         url: urlPath + 'api/user/get',
         cache: false,
         method: "POST",
-        data: JSON.stringify({ dept: $("#ddDept").val(), site: $("#ddSite").val() }),
+        data: JSON.stringify({ dept: $("#ddDept").val(), site: sessSite == "JKT" ? $("#ddSite").val() : sessSite }),
         contentType: "application/json; charset=utf-8",
         complete: function (res) {
             if (res.responseJSON.StatusCode == 200) {
