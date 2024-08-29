@@ -7,7 +7,7 @@ var signaturePad;
 var blankPad;
 
 $(document).ready(function () {
-    if (sessionId == "KHO" || sessionId == "KSI") {
+    if (sessionId == "KHO" || sessionId == "KST") {
         canvas = document.getElementById("deptSignaturePad")
     }
     else if (sessionId == "SIH" || sessionId == "SIS") {
