@@ -1,13 +1,19 @@
 ﻿var urlPath = $("#urlPath").val()
 var sessionId = $("#sessionId").val()
+var sessSite = $("#site").val()
 
 $(document).ready(function () {
     loadGrid()
 })
 
+$("#ddSite").change(function () {
+    loadGrid();
+})
+
 function loadGrid() {
     $.ajax({
         url: urlPath + 'api/ba/serahterima/get',
+        data: JSON.stringify({ site: sessSite != "JKT" ? sessSite : $("#ddSite").val() }),
         cache: false,
         method: "POST",
         contentType: "application/json; charset=utf-8",

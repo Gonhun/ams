@@ -9,6 +9,18 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">B.A Serah Terima</h3>
+                @{
+                    if (Session["role_id"].ToString() == BssCoreV2.Constant.ITConstant.AccessItCode.StafItHo)
+                    {
+                        <select id="ddSite">
+                            <option value="">--FILTER PER SITE--</option>
+                            @foreach (var item in ViewBag.Site)
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        </select>
+                    }
+                }
             </div>
             <!-- /.card-header -->
             <div class="card-body">
