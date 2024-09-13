@@ -64,8 +64,8 @@
                                                                 <div class="row">
 
                                                                     @{
-                                                                        if (new List<string>() { 
-                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KasiHo, 
+                                                                        if (new List<string>() {
+                                                                            BssCoreV2.Constant.ITConstant.AccessItCode.KasiHo,
                                                                             BssCoreV2.Constant.ITConstant.AccessItCode.KasiSite,
                                                                             BssCoreV2.Constant.ITConstant.AccessItCode.KabagHo,
                                                                             BssCoreV2.Constant.ITConstant.AccessItCode.KabagSite,
@@ -126,7 +126,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -203,6 +203,68 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="info-box">
+                                                <div class="info-box-content">
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Kabag Terkait</label>
+                                                                <div class="row">
+                                                                    <div class="col-lg-10 col-sm-8">
+                                                                        <input type="text" class="form-control" id="txtNikKabag">
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-sm-4">
+                                                                        <button type="button" class="btn btn-success" id="btnSearchKabag">
+                                                                            <i class="fa fa-search"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>Nama</label>
+                                                                <input type="text" class="form-control" id="txtNamaKabag" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        @{
+                                                            if (new List<string>() {
+    BssCoreV2.Constant.ITConstant.AccessItCode.KasiSite,
+    BssCoreV2.Constant.ITConstant.AccessItCode.KabagSite,
+    BssCoreV2.Constant.ITConstant.AccessItCode.StafSite,
+
+}.Any(x => Session["role_id"].ToString().Contains(x)))
+                                                            {
+                                                                <div class="col-lg-4">
+                                                                    <label>PM Site</label>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-10 col-sm-8">
+                                                                            <input type="text" class="form-control" id="txtNikPm">
+                                                                        </div>
+                                                                        <div class="col-lg-2 col-sm-4">
+                                                                            <button type="button" class="btn btn-success" id="btnSearchPm">
+                                                                                <i class="fa fa-search"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label>Nama</label>
+                                                                        <input type="text" class="form-control" id="txtNamaPm" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

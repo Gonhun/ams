@@ -515,11 +515,7 @@ function loadGrid() {
                         }
                     },
                     {
-                        'data': 'req_nik',
-                        className: 'dt-head-center dt-nowrap'
-                    },
-                    {
-                        'data': 'req_name',
+                        'data': 'req_site',
                         className: 'dt-head-center dt-nowrap'
                     },
                     {
@@ -527,7 +523,11 @@ function loadGrid() {
                         className: 'dt-head-center dt-nowrap'
                     },
                     {
-                        'data': 'req_site',
+                        'data': 'req_nik',
+                        className: 'dt-head-center dt-nowrap'
+                    },
+                    {
+                        'data': 'req_name',
                         className: 'dt-head-center dt-nowrap'
                     },
                     {

@@ -22,6 +22,48 @@ $("#btnSearch").click(function () {
     loadNrp();
 })
 
+$("#btnSearchKabag").click(function () {
+    if ($("#txtNikKabag").val() == "") {
+        alert("nik harus diisi");
+    }
+    else {
+        var i = 0;
+        $.ajax({
+            url: urlPath + 'api/request/get/emp',
+            cache: false,
+            data: JSON.stringify({ nik: $("#txtNikKabag").val() }),
+            method: "POST",
+            contentType: "application/json; charset=utf-8",
+            complete: function (res) {
+                console.log(res.responseJSON);
+                alert(res.responseJSON.StatusMessage)
+                $("#txtNamaKabag").val(res.responseJSON.Value.name);
+            }
+        })
+    }
+})
+
+$("#btnSearchPm").click(function () {
+    if ($("#txtNikPm").val() == "") {
+        alert("nik harus diisi");
+    }
+    else {
+        var i = 0;
+        $.ajax({
+            url: urlPath + 'api/request/get/emp',
+            cache: false,
+            data: JSON.stringify({ nik: $("#txtNikPm").val() }),
+            method: "POST",
+            contentType: "application/json; charset=utf-8",
+            complete: function (res) {
+                console.log(res.responseJSON);
+                alert(res.responseJSON.StatusMessage)
+                $("#txtNamaPm").val(res.responseJSON.Value.name);
+            }
+        })
+    }
+})
+
 $("#btnSave").click(function () {
     Save();
 })
@@ -399,6 +441,8 @@ function Save() {
     formData.append("prev_asset", $("#txtPrev").val());
     formData.append("prev_asset_condition", $("#ddKondisi").val());
     formData.append("asset_recommendation", $("#ddRecommendation").val());
+    formData.append("dept_by", $("#txtNikKabag").val());
+    formData.append("pm_by", $("#txtNikPm").val());
 
     $.ajax({
         url: urlPath + 'api/request/insert',

@@ -62,7 +62,13 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label>Site</label>
-                                <input type="text" class="form-control" id="txtSite" disabled>
+                                <select id="txtSite">
+                                    <option value="">--PILIH SITE--</option>
+                                    @foreach (var item in ViewBag.Site)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>

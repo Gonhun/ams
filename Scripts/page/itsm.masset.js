@@ -240,15 +240,19 @@ function loadGrid() {
                         className: 'dt-nowrap align-middle'
                     },
                     {
+                        'data': 'asset_site',
+                        className: 'dt-head-center dt-nowrap align-middle'
+                    },
+                    {
                         'data': 'asset_num',
                         className: 'dt-nowrap align-middle'
                     },
                     {
-                        'data': 'asset_no_pp',
+                        'data': 'asset_no_pr',
                         className: 'dt-nowrap align-middle'
                     },
                     {
-                        'data': 'asset_no_pb',
+                        'data': 'asset_no_sap',
                         className: 'dt-nowrap align-middle'
                     },
                     {
@@ -283,10 +287,6 @@ function loadGrid() {
                     },
                     {
                         'data': 'asset_sn',
-                        className: 'dt-head-center dt-nowrap align-middle'
-                    },
-                    {
-                        'data': 'asset_site',
                         className: 'dt-head-center dt-nowrap align-middle'
                     },
                     {
@@ -438,8 +438,8 @@ function Save() {
     }
 
     formData.append("asset_num", $("#txtNoAset").val());
-    formData.append("asset_no_pp", $("#txtNoPp").val());
-    formData.append("asset_no_pb", $("#txtNoPb").val());
+    formData.append("asset_no_pr", $("#txtNoPr").val());
+    formData.append("asset_no_sap", $("#txtNoSap").val());
     formData.append("asset_received", $("#txtTgl").val());
     formData.append("asset_name", $("#txtNama").val());
     formData.append("asset_status", $("#ddStatus").val());
